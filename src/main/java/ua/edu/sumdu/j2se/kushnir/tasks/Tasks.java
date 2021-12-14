@@ -2,8 +2,7 @@ package ua.edu.sumdu.j2se.kushnir.tasks;
 
 import java.time.LocalDateTime;
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
+
 
 public class Tasks {
 
@@ -44,7 +43,7 @@ public class Tasks {
         for (Task task : incoming(tasks, from, to)) {
             LocalDateTime nextDateInCalendar;
             for (nextDateInCalendar = task.nextTimeAfter(from); nextDateInCalendar.compareTo(to) <= 0; nextDateInCalendar = nextDateInCalendar.plusSeconds(task.getRepeatInterval())) {
-                calendarTask.computeIfAbsent(nextDateInCalendar, k -> new HashSet<>()).add(task);
+                calendarTask.computeIfAbsent(nextDateInCalendar, value -> new HashSet<>()).add(task);
             }
         }
         return calendarTask;
